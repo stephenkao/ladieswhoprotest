@@ -1,0 +1,18 @@
+<div class="flex-container spaced">
+  <div class="flex-child">
+    <div class="flex-container">
+      <div class="flex-child">
+        <img class="item__image" src="http://placehold.it/190x190/ffffff/f26d50" />
+      </div>
+      <div class="flex-child">
+        <h3 class="item__name">{{name}}</h3>
+        <button class="item__button" data-remove>{% if quantity === 1 %}x{% else %}-{% endif %}</button>
+        <span class="item__quantity">{{quantity}}</span>
+        <button class="item__button" data-add>{% if quantity < 5 %}+{% endif %}</button>
+      </div>
+    </div>
+  </div>
+  <div class="flex-child">
+    <p class="price">{{quantity * price}}</p>
+  </div>
+</div>

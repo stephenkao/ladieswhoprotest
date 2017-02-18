@@ -1,0 +1,24 @@
+<button data-close-cart class="desktop--hidden button--link">[X]</button>
+<div class="flex-container spaced">
+  <div class="flex-child">
+    <h2>{{totalItems}} item{% if (totalItems != 1) %}s{% endif %} in your cart</h2>
+  </div>
+  <div class="flex-child">
+    <span class="price">{{total}}</span>
+  </div>
+</div>
+<hr />
+{% if (totalItems != 0) %}
+  <div class="flex-container spaced">
+    <div class="flex-child">
+      <h3 class="meta">Shipping</h3>
+      <h3 class="meta">Total</h3>
+    </div>
+    <div class="flex-child">
+      <span class="meta">FREE</span>
+      <span class="meta price">{{total}}</span>
+    </div>
+  </div>
+  <hr />
+  <ol data-cart-products></ol>
+{% endif %}

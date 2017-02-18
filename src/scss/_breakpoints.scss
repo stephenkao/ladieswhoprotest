@@ -1,0 +1,15 @@
+$desktop: 700px;
+
+@mixin breakpoint($point) {
+  @if ($point == mobile) {
+    @media (max-width: $desktop - 1) {
+      @content;
+    }
+  }
+
+  @if ($point == desktop) {
+    @media (min-width: $desktop) {
+      @content;
+    }
+  }
+}
