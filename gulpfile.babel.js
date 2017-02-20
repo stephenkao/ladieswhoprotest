@@ -19,12 +19,14 @@ gulp.task('clean', tasks.clean);
 
 gulp.task('lint', tasks.lint);
 
+gulp.task('browser-sync', tasks.browserSync);
+
+
 gulp.task('webpack:build', tasks.webpack);
 gulp.task('webpack:hot', tasks.webpack);
 
+// TODO: Make WP request and generate partials for each entry
 gulp.task('assemble', tasks.assemble);
-
-gulp.task('browser-sync', tasks.browserSync);
 
 
 gulp.task('build', gulp.series(
@@ -38,6 +40,7 @@ gulp.task('watch:subscribe', () => {
   gulp.watch([jsFiles, scssFiles, pageFiles]).on('change', gulp.series('assemble'));
   gulp.watch([jsFiles]).on('change', gulp.series('lint:source'));
 });
+
 gulp.task('watch', gulp.series(
   'clean',
   'lint',
