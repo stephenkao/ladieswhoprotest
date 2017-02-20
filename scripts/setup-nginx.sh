@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # TODO: Figure this out, ya dummy!
-ENV="development"
+#ENV="development"
 
 cwd=`pwd`
 
 
 # Set up php-fpm
-php_conf_dir=~/workspace/stephenkao/ladieswhoprotest/config/php
+php_conf_dir=/home/stephenkao/workspace/stephenkao/ladieswhoprotest/config/php
 mkdir /var/log/php
 touch -f /var/log/php/php-fpm.log
 if [ "$ENV" == "development" ]; then
@@ -21,7 +21,7 @@ fi
 
 # Set up nginx
 nginx_dir=/usr/local/nginx
-nginx_conf_dir=~/workspace/stephenkao/ladieswhoprotest/config/nginx
+nginx_conf_dir=/home/stephenkao/workspace/stephenkao/ladieswhoprotest/config/nginx
 
 
 cd $nginx_dir

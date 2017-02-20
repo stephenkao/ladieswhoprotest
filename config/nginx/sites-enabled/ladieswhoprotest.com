@@ -6,7 +6,7 @@ server {
   server_name ladieswhoprotest.com;
 
   # Path to document root
-  root /Users/stephenkao/workspace/stephenkao/ladieswhoprotest;
+  root /home/stephenkao/workspace/stephenkao/ladieswhoprotest;
 
   # File to be used as index
   index index.html;
@@ -40,13 +40,13 @@ server {
   }
 
   location ~* ^wordpress\.(js|jpg|png|css)$ {
-     root /Users/stephenkao/workspace/stephenkao/ladieswhoprotest/wordpress;
+     root /home/stephenkao/workspace/stephenkao/ladieswhoprotest/wordpress;
      expires 30d;
   }
 
 
   location ~ ^wordpress/wp/*$ {
-    try_files /Users/stephenkao/workspace/stephenkao/ladieswhoprotest/wordpress/wp-includes/rest-api.php =404;
+    try_files /home/stephenkao/workspace/stephenkao/ladieswhoprotest/wordpress/wp-includes/rest-api.php =404;
   }
 
   location / {
