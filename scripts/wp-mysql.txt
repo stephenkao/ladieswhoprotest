@@ -1,0 +1,7 @@
+mysql -u root -p
+
+create database ladieswhoprotest;
+use ladieswhoprotest;
+CREATE USER 'stephenkao'@'localhost' IDENTIFIED BY 'changeme';
+GRANT ALL PRIVILEGES ON * . * TO 'stephenkao'@'localhost';
+flush privileges;
