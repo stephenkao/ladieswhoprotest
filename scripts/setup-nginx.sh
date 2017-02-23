@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # TODO: Figure this out, ya dummy!
-ENV="development"
+#ENV="development"
 
 cwd=`pwd`
 
@@ -50,6 +50,7 @@ cp -f "$nginx_conf_dir/sites-enabled/ladieswhoprotest.com" "$nginx_dir/sites-ena
 if [ "$ENV" == "development" ]; then
     mv "$nginx_dir/sites-enabled/ladieswhoprotest.com" "$nginx_dir/sites-enabled/ladieswhoprotest.me"
     sed -i 's/ladieswhoprotest.com/ladieswhoprotest.me/g' "$nginx_dir/sites-enabled/ladieswhoprotest.me"
+    sed -i 's/\/home\/stephenkao/\/Users\/stephenkao/g' "$nginx_dir/sites-enabled/ladieswhoprotest.me"
 fi
 
 if [ ! -d "/run" ]; then

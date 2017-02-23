@@ -1,12 +1,12 @@
 server {
   # Ports to listen on
-    listen 80;
+  listen 80;
 
   # Server name to listen for
   server_name ladieswhoprotest.com;
 
   # Path to document root
-  root /Users/stephenkao/workspace/stephenkao/ladieswhoprotest;
+  root /home/stephenkao/workspace/stephenkao/ladieswhoprotest;
 
   # File to be used as index
   index index.html;
@@ -22,9 +22,13 @@ server {
   # rewrite ^/wordpress/wp-json /wordpress/index.php last;
   rewrite ^/wp-json /wordpress/index.php last;
 
+  rewrite ^/wordpress/wp-login/?$ /wordpress/wp-login.php last;
+  rewrite ^/wordpress/wp-admin/?$ /wordpress/wp-admin/index.php last;
+
   location ~ \.php$ {
+#    root /home/stephenkao/workspace/stephenkao/ladieswhoprotest/wordpress;
+
     try_files $uri $uri/ =404;
-#    try_files $uri $uri/ /index.php$is_args$args;
 
     fastcgi_intercept_errors on;
     fastcgi_pass unix:/var/run/php5-fpm.sock;
@@ -40,19 +44,31 @@ server {
     include global/fastcgi-params.conf;
   }
 
-  location ~* ^wordpress\.(js|jpg|png|css)$ {
-     root /Users/stephenkao/workspace/stephenkao/ladieswhoprotest/wordpress;
-     expires 30d;
+  # location ~ ^/wordpress/*/\.(js|jpg|png|css)$ {
+  #    root /home/stephenkao/workspace/stephenkao/ladieswhoprotest/wordpress;
+  # }
+
+  ## Static files are served directly.
+  location ~ ^/wp-includes/\.(?:css|gif|htc|ico|js|jpe?g|png|swf)$ {
+    root /home/stephenkao/workspace/stephenkao/ladieswhoprotest/wordpress/wp-includes;
+
+    expires max;
+    log_not_found off;
+
+    ## No need to bleed constant updates. Send the all shebang in one
+    ## fell swoop.
+    tcp_nodelay off;
+
+    ## Set the OS file cache.
+    open_file_cache max=1000 inactive=120s;
+    open_file_cache_valid 45s;
+    open_file_cache_min_uses 2;
+    open_file_cache_errors off;
   }
 
-  location ~ ^wordpress/wp/*$ {
-    try_files /Users/stephenkao/workspace/stephenkao/ladieswhoprotest/wordpress/wp-includes/rest-api.php =404;
-  }
-
-  location / {
-    try_files $uri $uri/ /index.html?$args;
-  }
-
+  # location ~ ^wordpress/wp/*$ {
+  #   try_files /home/stephenkao/workspace/stephenkao/ladieswhoprotest/wordpress/wp-includes/rest-api.php =404;
+  # }
 }
 
 # Redirect www to non-www
