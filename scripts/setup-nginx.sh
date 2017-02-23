@@ -1,27 +1,32 @@
 #!/bin/bash
 
 # TODO: Figure this out, ya dummy!
-#ENV="development"
+ENV="development"
 
 cwd=`pwd`
 
+if [ "$ENV" == "development" ]; then
+    root="/Users/stephenkao"
+else
+    root="/home/stephenkao"
+fi
 
 # Set up php-fpm
-php_conf_dir=/home/stephenkao/workspace/stephenkao/ladieswhoprotest/config/php
 mkdir /var/log/php
 touch -f /var/log/php/php-fpm.log
 if [ "$ENV" == "development" ]; then
+    php_conf_dir="$root/workspace/stephenkao/ladieswhoprotest/config/php"
     cp "$php_conf_dir/php.ini" /private/etc
     cp "$php_conf_dir/php-fpm.conf" /private/etc
-
 else
+    php_conf_dir="$root/workspace/stephenkao/ladieswhoprotest/config/php"
     cp "$php_conf_dir/php.ini" /etc/php5/fpm
     cp "$php_conf_dir/php-fpm.conf" /etc/php5/fpm
 fi
 
 # Set up nginx
 nginx_dir=/usr/local/nginx
-nginx_conf_dir=/home/stephenkao/workspace/stephenkao/ladieswhoprotest/config/nginx
+nginx_conf_dir="$root/workspace/stephenkao/ladieswhoprotest/config/nginx"
 
 
 cd $nginx_dir
