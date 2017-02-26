@@ -11,17 +11,17 @@ import requireDir from 'require-dir';
 export default function(gulp) {
   const retVal = {};
 
-  const tasks = requireDir('../tasks', {camelCase: true});
-  for (let key in tasks) {
-    if (tasks.hasOwnProperty(key)) {
+  const tasks = requireDir('../tasks', { camelCase: true });
+  if (tasks) {
+    Object.keys(tasks).forEach((key) => {
       const taskFn = tasks[key];
       const taskName = camelCase(key);
       if (typeof taskFn === 'function') {
-        Object.assign(retVal, {[taskName]: function(cb) {
+        Object.assign(retVal, { [taskName](cb) {
           return taskFn.call(this, gulp, cb);
-        }});
+        } });
       }
-    }
+    });
   }
 
   return retVal;

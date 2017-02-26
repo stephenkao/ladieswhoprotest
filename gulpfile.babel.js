@@ -1,17 +1,20 @@
 // Libraries
 import 'babel-polyfill';
-import path from 'path';
-import browserSync from 'browser-sync';
 import gulp from 'gulp';
 import TaskMetadata from 'undertaker-task-metadata';
 // Configuration
-import {jsFiles, scssFiles, pageFiles} from './config/env';
+import {
+  jsFiles,
+  pageFiles,
+  scssFiles,
+  testFiles
+} from './config/env';
 // Utilities
 import gatherTasks from './gulp/util/gather-tasks';
 
-
 // Add `name` to Gulp task closures
-// Why we need an external module for just this is beyond me.  Thanks for nothing, Gulp v4!
+// Why we need an external module for just this is beyond me.
+// Thanks for nothing, Gulp v4!
 gulp.registry(new TaskMetadata());
 const tasks = gatherTasks(gulp);
 
@@ -38,7 +41,7 @@ gulp.task('build', gulp.series(
 
 gulp.task('watch:subscribe', () => {
   gulp.watch([jsFiles, scssFiles, pageFiles]).on('change', gulp.series('assemble'));
-  gulp.watch([jsFiles]).on('change', gulp.series('lint:source'));
+  gulp.watch([jsFiles, testFiles]).on('change', gulp.series('lint'));
 });
 
 gulp.task('watch', gulp.series(

@@ -16,7 +16,7 @@ export const gulpFile = resolve(baseDir, 'gulpfile.babel.js');
 export const gulpFiles = resolve(gulpDir, '**', '*.js');
 
 export const srcDir = resolve(baseDir, 'src');
-export const jsFiles = resolve(srcDir, '**', '*.js');
+export const jsFiles = resolve(srcDir, '**', '*.js*');
 export const scssFiles = resolve(srcDir, '**', '*.scss');
 export const templateDir = resolve(srcDir, 'templates');
 export const pageFiles = resolve(templateDir, 'pages', '**', '*.html');

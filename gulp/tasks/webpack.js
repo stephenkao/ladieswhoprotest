@@ -1,14 +1,12 @@
 // Libraries
 import webpack from 'webpack';
 import gutil from 'gulp-util';
-import isFunction from 'lodash/isFunction';
 import Express from 'express';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
-import Rx, {Observable} from 'rx';
+import { Observable } from 'rx';
 // Configuration
-import {buildConfig, hotConfig} from '../../config/webpack';
-import {distDir, distFiles} from '../../config/env';
+import { buildConfig, hotConfig } from '../../config/webpack';
 
 
 function webpackBuild(gulp, cb) {
@@ -33,15 +31,6 @@ function webpackHot(gulp, cb) {
   const wpConfig = Object.create(hotConfig);
   const compiler = webpack(wpConfig);
 
-  function logger(err) {
-    if (err) {
-      throw new gutil.PluginError({
-        plugin: '[webpack]',
-        message: err.message
-      });
-    }
-  }
-
   return Observable.create((observer) => {
     const hmrServer = new Express();
     const hotPort = 8080;
@@ -51,13 +40,13 @@ function webpackHot(gulp, cb) {
     }));
     hmrServer.use(webpackHotMiddleware(compiler));
 
-    compiler.plugin('done', (stats) => {
+    compiler.plugin('done', () => {
       if (!hasRun) {
         hmrServer.listen(hotPort, (err) => {
           if (err) {
-            console.error(err);
+            global.console.error(err);
           } else {
-            console.info('Webpack development server listening on port %s', hotPort);
+            global.console.info('Webpack development server listening on port %s', hotPort);
           }
 
           hasRun = true;
@@ -72,9 +61,10 @@ function webpackHot(gulp, cb) {
 
 export default function(gulp, cb) {
   switch (this.name) {
-    case 'webpack:build':
-      return webpackBuild(gulp, cb);
     case 'webpack:hot':
       return webpackHot(gulp, cb);
+    case 'webpack:build':
+    default:
+      return webpackBuild(gulp, cb);
   }
 }

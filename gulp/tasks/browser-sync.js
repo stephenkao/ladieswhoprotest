@@ -1,8 +1,7 @@
 // Libraries
-import {resolve} from 'path';
 import browserSync from 'browser-sync';
 // Configuration
-import {baseDir, distDir} from '../../config/env';
+import { distDir } from '../../config/env';
 
 
 const middleware = [

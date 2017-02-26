@@ -31,7 +31,8 @@ const config = {
       include: [srcDir],
       query: {
         cacheDirectory: isDebug,
-        babelrc: true
+        babelrc: true,
+        presets: ['react']
       },
       exclude: /node_modules/
     }, {
@@ -94,7 +95,7 @@ const config = {
 };
 
 export const buildConfig = extend(true, {}, config, {
-  entry: path.resolve(srcDir, 'js', 'entry.js'),
+  entry: path.resolve(srcDir, 'js', 'index.jsx'),
   output: {
     path: distDir,
     filename: '[name].js',
@@ -119,7 +120,7 @@ export const hotConfig = extend(true, {}, config, {
   entry: [
     'webpack/hot/only-dev-server?path=http://localhost:8080',
     'webpack-hot-middleware/client?path=http://localhost:8080/__webpack_hmr&timeout=20000',
-    path.resolve(srcDir, 'js', 'entry.js')
+    path.resolve(srcDir, 'js', 'index.jsx')
   ],
   output: {
     path: '/',

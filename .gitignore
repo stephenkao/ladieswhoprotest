@@ -4,6 +4,7 @@ todo.org
 # Directories
 node_modules
 wordpress/wp-content/uploads
+dist
 
 # What
 .DS_Store
