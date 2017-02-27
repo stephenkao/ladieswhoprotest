@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, {PropTypes} from 'react';
 import ENGLISH_COPY from './english';
 import store from '../app/store';
 
@@ -13,14 +13,14 @@ function getTemplateString(name) {
 
 export function t(name, fill = {}) {
   const template = getTemplateString(name);
-  return template(fill, (parts) => parts.join(''));
+  return template(fill, parts => parts.join(''));
 }
 
-const T = ({ name, fill }) => {
+const T = ({name, fill}) => {
   const template = getTemplateString(name);
-  const parts = template(fill || {}, (x) => x);
+  const parts = template(fill || {}, x => x);
   /* eslint-disable react/no-array-index-key */
-  return <span>{parts.map((x, i) => <span key={ `rt-${i}` }>{x}</span>)}</span>;
+  return <span>{parts.map((x, i) => <span key={`rt-${i}`}>{x}</span>)}</span>;
   /* eslint-enable react/no-array-index-key */
 };
 

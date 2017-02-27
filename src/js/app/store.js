@@ -1,6 +1,6 @@
 // Libraries
-import { applyMiddleware, combineReducers, createStore, compose } from 'redux';
-import { routerMiddleware } from 'react-router-redux';
+import {applyMiddleware, combineReducers, createStore, compose} from 'redux';
+import {routerMiddleware} from 'react-router-redux';
 import thunk from 'redux-thunk';
 // Modules
 import postsReducers from '../modules/posts/reducers';

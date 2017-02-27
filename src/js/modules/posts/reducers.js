@@ -1,7 +1,7 @@
 import Immutable from 'immutable';
 import actionTypes from './action-types';
 
-const { GET_POSTS } = actionTypes;
+const {GET_POSTS} = actionTypes;
 
 const initialState = Immutable.fromJS({
   posts: []
@@ -12,7 +12,7 @@ function handleGetPosts(state, posts) {
     .set('posts', posts);
 }
 
-export default function reducers(state = initialState, { type, data }) {
+export default function reducers(state = initialState, {type, data}) {
   switch (type) {
     case GET_POSTS:
       return handleGetPosts(state, data);

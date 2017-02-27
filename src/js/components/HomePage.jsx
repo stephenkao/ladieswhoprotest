@@ -1,13 +1,13 @@
 // Libraries
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
+import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
 // Configuration
-import { postPropTypes } from '../config/prop-definitions';
+import {postPropTypes} from '../config/prop-definitions';
 // Components
 // import GalleryPost from './GalleryPost';
 
 
-@connect((state) => ({
+@connect(state => ({
   posts: state.posts.get('posts')
 }))
 /* eslint-disable react/prefer-stateless-function */
@@ -21,12 +21,12 @@ export default class HomePage extends Component {
   };
 
   render() {
-    const { posts } = this.props;
+    const {posts} = this.props;
 
     return (
       <ul>
-        { posts.forEach((post) => (
-          <li className="post" key={ post.id } />
+        { posts.forEach(post => (
+          <li className="post" key={post.id} />
         )) }
       </ul>
     );

@@ -1,9 +1,9 @@
 // Libraries
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
+import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
 
 
-@connect((state) => ({
+@connect(state => ({
   isFetching: state.posts.get('isFetching')
 }))
 /* eslint-disable react/prefer-stateless-function */
