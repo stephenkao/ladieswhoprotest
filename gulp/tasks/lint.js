@@ -1,5 +1,6 @@
 // Libraries
 import eslint from 'gulp-eslint';
+import through from 'through2';
 // Configuration
 import {
   baseDir,
@@ -26,10 +27,27 @@ const eslintConfig = {
   useEslintrc: true
 };
 
+function lintAndFix(gulp) {
+  function saveFixedFile(file) {
+    if (file && file.eslint && file.eslint.fixed) {
+      console.log(file);
+    }
+  }
+
+  return through.obj((file, encoding, callback) => {
+    if (shouldFix) {
+      callback(null, saveFixedFile(file));
+    } else {
+      callback(null);
+    }
+  });
+}
+
 function lint(gulp) {
   return gulp.src(lintableFiles)
-    .pipe(eslint(eslintConfig))
-    .pipe(eslint.format());
+             .pipe(eslint(eslintConfig))
+             .pipe(eslint.format())
+             .pipe(lintAndFix(gulp));
 }
 
 export default function(gulp) {
