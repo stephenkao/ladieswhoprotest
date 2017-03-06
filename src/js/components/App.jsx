@@ -1,33 +1,47 @@
 // Libraries
-import React, {Component, PropTypes} from 'react';
-import {connect} from 'react-redux';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+// Actions
+import { getPosts } from '../modules/posts/action-creators';
+// Utilities
+import rit from '../utils/rit';
 
 
-@connect(state => ({
-  isFetching: state.posts.get('isFetching')
-}))
 /* eslint-disable react/prefer-stateless-function */
+@connect((state) => ({
+  isFetching: state.posts.get('isFetching'),
+  posts: state.posts.get('posts')
+}))
 export default class App extends Component {
+  static defaultProps = {
+    children: [],
+    isFetching: false
+  };
+
   static propTypes = {
     children: PropTypes.node,
+    dispatch: PropTypes.func.isRequired,
     isFetching: PropTypes.bool
   };
 
+  componentDidMount() {
+    this.props.dispatch(getPosts());
+  }
+
   render() {
-    if (this.props.isFetching) {
-      return (
-        <div className="App">
+    console.log(this.props);
+
+    const { children, isFetching } = this.props;
+
+    return (
+      <div className="App">
+        { rit(isFetching, () => (
           <img
             alt="Loading"
             className="spinner"
           />
-        </div>
-      );
-    }
-
-    return (
-      <div className="App">
-        {this.props.children}
+        )) }
+        { rit(!isFetching, children) }
       </div>
     );
   }

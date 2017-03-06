@@ -1,6 +1,6 @@
 // Libraries
-import {applyMiddleware, combineReducers, createStore, compose} from 'redux';
-import {routerMiddleware} from 'react-router-redux';
+import { applyMiddleware, combineReducers, createStore, compose } from 'redux';
+import { routerReducer, routerMiddleware } from 'react-router-redux';
 import thunk from 'redux-thunk';
 // Modules
 import postsReducers from '../modules/posts/reducers';
@@ -10,8 +10,9 @@ import browserHistory from './history';
 
 
 const reducers = combineReducers({
-  posts: postsReducers
-//  navigation: navigationReducers
+  posts: postsReducers,
+  //  navigation: navigationReducers,
+  routing: routerReducer
 });
 
 const middleware = [

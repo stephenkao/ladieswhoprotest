@@ -104,7 +104,7 @@ export const buildConfig = extend(true, {}, config, {
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(true),
     new webpack.optimize.UglifyJsPlugin({
-      compress: {warnings: isVerbose}
+      compress: { warnings: isVerbose }
     }),
     new ExtractTextPlugin('[name].css'),
     new AssetsPlugin({

@@ -8,7 +8,8 @@
     "transform-decorators-legacy",
     "transform-es2015-arrow-functions",
     "transform-object-rest-spread",
-    "transform-regenerator"
+    "transform-regenerator",
+    "transform-runtime"
   ],
   "ignore": [
     "node_modules"

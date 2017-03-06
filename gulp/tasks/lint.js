@@ -1,6 +1,7 @@
 // Libraries
 import eslint from 'gulp-eslint';
 import through from 'through2';
+import vfs from 'vinyl-fs';
 // Configuration
 import {
   baseDir,
@@ -27,11 +28,13 @@ const eslintConfig = {
   useEslintrc: true
 };
 
-function lintAndFix(gulp) {
+function lintAndFix() {
   function saveFixedFile(file) {
     if (file && file.eslint && file.eslint.fixed) {
-      console.log(file);
+      return file.pipe(vfs.dest(file.path));
     }
+
+    return null;
   }
 
   return through.obj((file, encoding, callback) => {
