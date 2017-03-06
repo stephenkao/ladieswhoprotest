@@ -17,14 +17,16 @@ export function requestPosts(params = {}) {
       })
     });
 
-    dispatch(fetchPosts(params)).then((posts) => {
-      dispatch({
-        type: RECEIVE_POSTS,
-        data: fromJS({
-          isFetching: false,
-          posts
-        })
+    fetchPosts(params)
+      .then((posts) => {
+        dispatch({
+          data: fromJS({
+            isFetching: false,
+            posts
+          }),
+          status: 'success',
+          type: RECEIVE_POSTS
+        });
       });
-    });
   };
 }

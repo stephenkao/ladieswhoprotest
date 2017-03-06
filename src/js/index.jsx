@@ -1,7 +1,7 @@
 // Libraries
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, IndexRoute, IndexRedirect, Redirect } from 'react-router';
+import { Router, Route, IndexRoute, Redirect } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { Provider } from 'react-redux';
 // Application
@@ -17,6 +17,7 @@ ReactDOM.render(
   <Provider store={ store }>
     <Router history={ syncHistoryWithStore(browserHistory, store) }>
       <Route path="/" component={ App }>
+        <IndexRoute component={ HomePage } onEnter={ genRouteHandler() } />
         <Route path="home" component={ HomePage } onEnter={ genRouteHandler() } />
         <Redirect path="*" to="home" />
       </Route>

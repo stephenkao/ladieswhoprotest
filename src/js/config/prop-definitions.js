@@ -1,5 +1,5 @@
 // Libraries
-import {PropTypes} from 'react';
+import { PropTypes } from 'react';
 
 export const postPropTypes = PropTypes.shape({
   id: PropTypes.number.isRequired,

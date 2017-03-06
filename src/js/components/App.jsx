@@ -2,9 +2,11 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 // Actions
-import { getPosts } from '../modules/posts/action-creators';
-// Utilities
-import rit from '../utils/rit';
+import { requestPosts } from '../modules/posts/action-creators';
+// Components
+import LoadingPage from './LoadingPage';
+// Styles
+import '../../scss/main.scss';
 
 
 /* eslint-disable react/prefer-stateless-function */
@@ -25,23 +27,16 @@ export default class App extends Component {
   };
 
   componentDidMount() {
-    this.props.dispatch(getPosts());
+    this.props.dispatch(requestPosts());
   }
 
   render() {
-    console.log(this.props);
-
     const { children, isFetching } = this.props;
 
     return (
       <div className="App">
-        { rit(isFetching, () => (
-          <img
-            alt="Loading"
-            className="spinner"
-          />
-        )) }
-        { rit(!isFetching, children) }
+        { isFetching && <LoadingPage /> }
+        { !isFetching && children }
       </div>
     );
   }

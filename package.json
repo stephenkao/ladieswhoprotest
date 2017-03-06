@@ -40,7 +40,7 @@
     "babel-preset-react": "^6.23.0",
     "babel-register": "^6.22.0",
     "browser-sync": "^2.18.7",
-    "css-loader": "^0.26.1",
+    "css-loader": "^0.26.2",
     "del": "^2.2.2",
     "engine-nunjucks": "^0.2.0",
     "eslint": "^3.16.1",
@@ -62,7 +62,7 @@
     "postcss-loader": "^1.2.2",
     "regenerator-runtime": "^0.10.1",
     "require-dir": "^0.3.1",
-    "sass-loader": "^4.1.1",
+    "sass-loader": "^6.0.2",
     "style-loader": "^0.13.1",
     "through2": "^2.0.3",
     "undertaker-task-metadata": "^1.0.0",
@@ -72,6 +72,7 @@
     "webpack-hot-middleware": "^2.16.1"
   },
   "dependencies": {
+    "autoprefixer-loader": "^3.2.0",
     "console-polyfill": "^0.2.3",
     "core-decorators": "^0.15.0",
     "immutable": "^3.8.1",
@@ -79,6 +80,7 @@
     "key-mirror": "^1.0.1",
     "lodash": "^4.17.4",
     "moment": "^2.17.1",
+    "node-sass": "^4.5.0",
     "query-strings": "^0.0.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",

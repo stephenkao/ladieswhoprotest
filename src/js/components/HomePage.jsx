@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 // Configuration
 import { postPropTypes } from '../config/prop-definitions';
 // Components
-// import GalleryPost from './GalleryPost';
+import GalleryPost from './GalleryPost';
 
 
 @connect((state) => ({
-  posts: state.posts.get('posts')
+  posts: state.posts.get('posts').toJS()
 }))
 /* eslint-disable react/prefer-stateless-function */
 export default class HomePage extends Component {
@@ -23,12 +23,16 @@ export default class HomePage extends Component {
   render() {
     const { posts } = this.props;
 
+    if (!posts.length) {
+      return null;
+    }
+
     return (
-      <ul>
-        { posts.forEach((post) => (
-          <li className="post" key={ post.id } />
-        )) }
-      </ul>
+      <div className="HomePage">
+        <ul className="flex-container">
+          { posts.map((post) => <GalleryPost post={ post } key={ post.id } />) }
+        </ul>
+      </div>
     );
   }
 }

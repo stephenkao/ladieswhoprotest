@@ -1,23 +1,30 @@
+// Libraries
 import { fromJS } from 'immutable';
+// Configuration
 import actionTypes from './action-types';
 
-const { FETCH_POSTS, RECEIVED_POSTS } = actionTypes;
+
+const { REQUEST_POSTS, RECEIVE_POSTS } = actionTypes;
 
 const initialState = fromJS({
   isFetching: true,
   posts: []
 });
 
-function handleGetPosts(state, { isFetching, posts }) {
+function handleGetPosts(state, data) {
+  if (!data) {
+    return state;
+  }
+
   return state
-    .set('isFetching', isFetching)
-    .set('posts', posts);
+    .set('isFetching', data.get('isFetching'))
+    .set('posts', data.get('posts'));
 }
 
 export default function reducers(state = initialState, { type, data }) {
   switch (type) {
-    case FETCH_POSTS:
-    case RECEIVED_POSTS:
+    case REQUEST_POSTS:
+    case RECEIVE_POSTS:
       return handleGetPosts(state, data);
   }
 

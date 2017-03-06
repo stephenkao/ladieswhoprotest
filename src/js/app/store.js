@@ -1,7 +1,7 @@
 // Libraries
 import { applyMiddleware, combineReducers, createStore, compose } from 'redux';
 import { routerReducer, routerMiddleware } from 'react-router-redux';
-import thunk from 'redux-thunk';
+import thunkMiddleware from 'redux-thunk';
 // Modules
 import postsReducers from '../modules/posts/reducers';
 // import navigationReducers from '../modules/navigation/reducers';
@@ -16,14 +16,12 @@ const reducers = combineReducers({
 });
 
 const middleware = [
-  applyMiddleware(thunk),
-  applyMiddleware(routerMiddleware(browserHistory))
+  thunkMiddleware,
+  routerMiddleware(browserHistory)
 ];
 
-if (window.devToolsExtension) {
-  middleware.push(window.devToolsExtension());
-}
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(reducers, compose(...middleware));
+const store = createStore(reducers, composeEnhancers(applyMiddleware(...middleware)));
 
 export default store;

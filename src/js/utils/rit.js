@@ -1,5 +1,14 @@
+// Libraries
+import isString from 'lodash/isString';
+
+
 function isTruthy(val) {
-  return !!val; // eslint-disable-line no-extra-boolean-cast
+  let ret = !!val;
+  if (isString(val)) {
+    ret = true;
+  }
+
+  return ret;
 }
 
 export default function rit(...args) {

@@ -15,6 +15,10 @@ import autoprefixer from 'autoprefixer';
 import extend from 'extend';
 
 
+const extractSass = new ExtractTextPlugin({
+  filename: '[name].[hash].css'
+});
+
 const isDebug = process.argv.indexOf('--debug') !== -1;
 const isVerbose = process.argv.indexOf('--verbose') !== -1;
 
@@ -37,29 +41,41 @@ const config = {
       exclude: /node_modules/
     }, {
       test: /\.scss$/,
-      loader: ExtractTextPlugin.extract({
-        fallbackLoader: 'style-loader',
-        loader: 'css-loader?sourceMap!autoprefixer-loader!sass-loader?sourceMap'
+      loader: extractSass.extract({
+        use: [{
+          loader: 'css-loader',
+          options: {
+            sourceMap: true
+          }
+        }, {
+          loader: 'autoprefixer-loader'
+        }, {
+          loader: 'sass-loader',
+          options: {
+            sourceMap: true
+          }
+        }],
+        fallback: 'style-loader'
       })
     }, {
       test: /\.json$/,
-      loader: 'json-loader',
+      loader: 'json-loader'
     }, {
       test: /\.txt$/,
-      loader: 'raw-loader',
+      loader: 'raw-loader'
     }, {
       test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
       loader: 'url-loader',
       query: {
         name: isDebug ? '[path][name].[ext]?[hash]' : '[hash].[ext]',
-        limit: 10000,
-      },
+        limit: 10000
+      }
     }, {
       test: /\.(eot|ttf|wav|mp3)$/,
       loader: 'file-loader',
       query: {
-        name: isDebug ? '[path][name].[ext]?[hash]' : '[hash].[ext]',
-      },
+        name: isDebug ? '[path][name].[ext]?[hash]' : '[hash].[ext]'
+      }
     }, {
       test: /\.html$/,
       loader: 'nunjucks-loader'
@@ -67,7 +83,7 @@ const config = {
   },
   resolve: {
     modules: ['node_modules'],
-    extensions: ['.js', '.jsx', '.json'],
+    extensions: ['.js', '.jsx', '.json']
   },
   cache: isDebug,
   stats: {
@@ -79,7 +95,7 @@ const config = {
     chunks: isVerbose,
     chunkModules: isVerbose,
     cached: isVerbose,
-    cachedAssets: isVerbose,
+    cachedAssets: isVerbose
   },
 
   plugins: [
@@ -98,15 +114,15 @@ export const buildConfig = extend(true, {}, config, {
   entry: path.resolve(srcDir, 'js', 'index.jsx'),
   output: {
     path: distDir,
-    filename: '[name].js',
-    publicPath: 'http://localhost:3000/'
+    filename: '[name].[hash].js',
+    publicPath: 'js/'
   },
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(true),
     new webpack.optimize.UglifyJsPlugin({
       compress: { warnings: isVerbose }
     }),
-    new ExtractTextPlugin('[name].css'),
+    new ExtractTextPlugin('css/[name].[hash].css'),
     new AssetsPlugin({
       filename: 'webpack-assets.json',
       path: distDir
@@ -131,7 +147,7 @@ export const hotConfig = extend(true, {}, config, {
     new webpack.optimize.OccurrenceOrderPlugin(true),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
-    new ExtractTextPlugin('[name].css'),
+    new ExtractTextPlugin('dist/css/[name].css'),
     new AssetsPlugin({
       filename: 'webpack-assets.json',
       path: distDir
