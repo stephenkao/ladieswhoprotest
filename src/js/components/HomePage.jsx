@@ -1,10 +1,11 @@
 // Libraries
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import Slider from 'react-slick';
 // Configuration
 import { postPropTypes } from '../config/prop-definitions';
 // Components
-import GalleryPost from './GalleryPost';
+import Gallery from './Gallery';
 
 
 @connect((state) => ({
@@ -29,9 +30,19 @@ export default class HomePage extends Component {
 
     return (
       <div className="HomePage">
-        <ul className="flex-container">
-          { posts.map((post) => <GalleryPost post={ post } key={ post.id } />) }
-        </ul>
+        <Slider
+          autoplay
+          infinite
+          pauseOnHover
+        >
+          <img src="http://placehold.it/1024x768" />
+          <img src="http://placehold.it/1024x768" />
+          <img src="http://placehold.it/1024x768" />
+          <img src="http://placehold.it/1024x768" />
+          <img src="http://placehold.it/1024x768" />
+          <img src="http://placehold.it/1024x768" />
+        </Slider>
+        <Gallery posts={ posts } />
       </div>
     );
   }

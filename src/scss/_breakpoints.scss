@@ -1,8 +1,15 @@
-$desktop: 700px;
+$tablet: 620px;
+$desktop: 768px;
 
 @mixin breakpoint($point) {
   @if ($point == mobile) {
-    @media (max-width: $desktop - 1) {
+    @media (max-width: $tablet - 1) {
+      @content;
+    }
+  }
+
+  @if ($point == tablet) {
+    @media (min-width: $tablet) {
       @content;
     }
   }

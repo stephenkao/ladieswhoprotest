@@ -19,8 +19,6 @@ button {
 
 html,
 body {
-  padding: $gutter;
-
   background-color: $color--background;
   color: $color--foreground;
 }
@@ -40,18 +38,14 @@ p {
   font-weight: 300;
 }
 
-.meta {
-  margin-bottom: $vertical-rhythm;
-
-  display: block;
-}
-
-.price:before {
-  content: '$';
-}
-
 .mobile--hidden {
   @include breakpoint(mobile) {
+    display: none !important;
+  }
+}
+
+.tablet--hidden {
+  @include breakpoint(tablet) {
     display: none !important;
   }
 }
@@ -62,180 +56,75 @@ p {
   }
 }
 
-.button--link {
-  border: 0;
-
-  background-color: transparent;
-  color: lighten($color--foreground, 20%);
-  font-size: 14px;
-  text-decoration: underline;
-  cursor: pointer;
-  outline: none;
-}
-
-////////////////////////////////////////////////// Posts
-.post--gallery {
-}
-
 ////////////////////////////////////////////////// Layout
 .flex-container {
+  width: 100%;
+
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 
   &.spaced {
     justify-content: space-between;
   }
 
   .flex-child {
-    align-self: center;
-
-    &:first-child {
-      margin-right: $gutter;
-    }
+    align-self: flex-start;
   }
 }
 
 .main {
-  @include breakpoint(desktop) {
-    display: flex;
-  }
+  max-width: 1024px;
+  padding: $gutter * 4 $gutter;
+  margin: 0 auto;
 }
 
-////////////////////////////////////////////////// Products
-.item {
-  margin-bottom: 4 * $vertical-rhythm;
+.App {
+  overflow-x: hidden;
 }
 
-.item__name {
-  margin-bottom: 2 * $vertical-rhythm;
-
-  @include breakpoint(desktop) {
-    font-size: 20px;
-  }
-}
-
-.item__image {
-  border: 1px solid lighten($color--foreground, 70%);
-  margin-bottom: $vertical-rhythm;
-}
-
-.item__description {
-  font-size: 12px;
-  line-height: 1.4;
-}
-
-.item__button {
-  border: 0;
-  padding: $vertical-rhythm;
-
-  font-size: 16px;
-  background-color: $color--action;
-  color: $color--white;
-  cursor: pointer;
-  outline: none;
-
-  transition: opacity 300ms;
-
-  &:hover {
-    opacity: 0.6;
-  }
-
-  @include breakpoint(desktop) {
-    font-size: 20px;
-  }
-}
-
-////////////////////////////////////////////////// Gallery
-.gallery {
-  $image-width: 140px;
-
-  .item__button,
-  .item__image {
-    width: $image-width;
-  }
-
-  .item__image {
-    height: $image-width;
-  }
-
-  .item__price {
-    font-weight: bold;
-  }
-
-  @include breakpoint(desktop) {
-    $image-width: 190px;
-
-    .item__button,
-    .item__image {
-      width: $image-width;
-    }
-
-    .item__image {
-      height: $image-width;
-    }
-  }
-
-  @include breakpoint(desktop) {
-    margin-right: $gutter;
-  }
-}
-
-////////////////////////////////////////////////// Cart
-.cart {
+////////////////////////////////////////////////// Posts
+.post--gallery {
   width: 100%;
-  height: 100%;
-  padding: 2 * $gutter;
+  margin-bottom: 2 * $gutter;
 
-  position: fixed;
-  top: 0;
-  left: 0;
+  .post__image {
+    width: 100%;
+    min-height: 300px;
 
-  background-color: $color--background;
-
-  $image-width: 110px;
-  .item__image {
-    width: $image-width;
-    height: $image-width;
-    margin-bottom: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
   }
 
-  .item__button,
-  .item__quantity {
-    padding: ($gutter / 4) ($gutter / 2);
+  .post__title {
+    padding: $gutter 0;
+
+    text-align: center;
   }
 
-  .item__button {
-    font-size: 14px;
-  }
+  @include breakpoint(tablet) {
+    width: auto;
+    margin: 0 $gutter $gutter * 2;
 
-  .button--link {
-    padding: 0;
+    .post__image {
+      width: 250px;
+      height: 250px;
 
-    position: absolute;
-    top: $gutter / 2;
-    right: 2 * $gutter;
-  }
+      transition: transform 100ms;
 
-  @include breakpoint(desktop) {
-    padding: 0;
-
-    position: relative;
-    flex-basis: 800px;
-
-    .item__name {
-      font-size: 12px;
+      &:hover {
+        transform: scale(1.05);
+      }
     }
+  }
+}
 
-    .item__button,
-    .item__quantity {
-      padding: ($gutter / 8) ($gutter / 4);
+////////////////////////////////////////////////// Carousel
+.slick-slider {
+  margin-bottom: 4 * $gutter;
 
-      font-size: 10px;
-    }
-
-    $image-width: 80px;
-    .item__image {
-      width: $image-width;
-      height: $image-width;
-    }
+  & > button {
+    display: none !important;
   }
 }
