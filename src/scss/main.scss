@@ -6,6 +6,21 @@
 $vertical-rhythm: 10px;
 $gutter: 20px;
 
+$font--primary: 'Merriweather', serif;
+$font--secondary: 'Proza Libra', sans-serif;
+$font--tertiary: 'Cormorant Garamond', serif;
+
+////////////////////////////////////////////////// Animations
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
 ////////////////////////////////////////////////// Generics
 * {
   box-sizing: border-box;
@@ -19,8 +34,14 @@ button {
 
 html,
 body {
+  width: 100%;
+
   background-color: $color--background;
   color: $color--foreground;
+}
+
+html {
+  overflow-x: hidden;
 }
 
 ol,
@@ -36,6 +57,10 @@ hr {
 p {
   margin-bottom: $vertical-rhythm;
   font-weight: 300;
+}
+
+a {
+  font-family: $font--primary;
 }
 
 .mobile--hidden {
@@ -73,24 +98,122 @@ p {
   }
 }
 
-.main {
-  max-width: 1024px;
-  padding: $gutter * 4 $gutter;
-  margin: 0 auto;
-}
-
 .App {
-  overflow-x: hidden;
+  width: 1024px;
+  margin: 0 auto;
+
+  &__content {
+    overflow-x: hidden;
+    position: relative;
+  }
 }
 
-////////////////////////////////////////////////// Posts
+.Navigation {
+  width: 100%;
+  padding: $gutter * 3 $gutter * 6;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  &__list {
+    display: flex;
+  }
+
+  &__link {
+    padding-top: $gutter;
+
+    flex: 1;
+
+    text-align: center;
+
+    a {
+      padding-top: 10px;
+      font-size: 20px;
+
+      text-decoration: none;
+      text-shadow: 1px 1px 1px #444;
+      color: $color--white;
+      transition: color 300ms;
+
+      &:hover {
+        color: #ddd;
+      }
+    }
+  }
+
+  &__logo {
+    width: 400px;
+    height: 180px;
+    margin-top: -18px;
+
+    background-image: url('../img/header.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+}
+
+////////////////////////////////////////////////// HomePage
+.HomePage {
+  width: 1024px;
+  height: 768px;
+
+  &__overlay {
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+
+  &__borderContainer {
+    width: calc(100% - #{$gutter});
+    height: calc(100% - #{$gutter});
+
+    position: absolute;
+    left: $gutter / 2;
+    top: $gutter / 2;
+  }
+
+  &__border {
+    width: 100%;
+    height: 100%;
+
+    background-image: url('../img/border.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+    transform: rotate(-0.5deg);
+  }
+}
+
+
+
+////////////////////////////////////////////////// GalleryPage
 .post--gallery {
   width: 100%;
+  padding: $gutter;
   margin-bottom: 2 * $gutter;
+
+  font-family: $font--primary;
+  opacity: 0;
+  animation: fade-in 800ms forwards;
+  background-color: $color--white;
+
+  .post__link {
+    color: $color--black;
+    text-transform: uppercase;
+    text-decoration: none;
+
+  }
 
   .post__image {
     width: 100%;
     min-height: 300px;
+    margin: 0 auto;
 
     background-repeat: no-repeat;
     background-size: cover;
@@ -99,32 +222,59 @@ p {
 
   .post__title {
     padding: $gutter 0;
+    font-size: 24px;
 
     text-align: center;
   }
 
   @include breakpoint(tablet) {
     width: auto;
-    margin: 0 $gutter $gutter * 2;
+
+    transition: transform 100ms;
+
+    &:hover {
+      transform: scale(1.05);
+
+      .post__title {
+        color: $color--action;
+        color: #cf0001;
+      }
+    }
+
+    .post__image,
+    .post__title {
+      width: 250px;
+    }
 
     .post__image {
-      width: 250px;
       height: 250px;
-
-      transition: transform 100ms;
-
-      &:hover {
-        transform: scale(1.05);
-      }
     }
   }
 }
 
 ////////////////////////////////////////////////// Carousel
 .slick-slider {
-  margin-bottom: 4 * $gutter;
-
   & > button {
     display: none !important;
+  }
+
+  img {
+    position: relative;
+  }
+}
+
+
+////////////////////////////////////////////////// Footer
+footer {
+  padding: 40px 200px;
+  font-family: $font--tertiary;
+  font-size: 20px;
+  line-height: 1.6;
+  text-align: center;
+
+  color: #444;
+
+  h3 {
+    font-size: 36px;
   }
 }

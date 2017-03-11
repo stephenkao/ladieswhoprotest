@@ -4,7 +4,7 @@ import { stringify } from 'query-string';
 import fetch from 'isomorphic-fetch';
 
 
-export async function fetchPosts(customParams = {}) {
+export async function requestPosts(customParams = {}) {
   const params = merge({ page: 1 }, customParams);
   const url = `http://ladieswhoprotest.com/wp-json/wp/v2/posts?${stringify(params)}`;
 

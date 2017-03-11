@@ -75,6 +75,7 @@
     "autoprefixer-loader": "^3.2.0",
     "console-polyfill": "^0.2.3",
     "core-decorators": "^0.15.0",
+    "file-loader": "^0.10.1",
     "immutable": "^3.8.1",
     "isomorphic-fetch": "^2.2.1",
     "key-mirror": "^1.0.1",
@@ -84,6 +85,7 @@
     "query-strings": "^0.0.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-images": "^0.5.2",
     "react-modal": "^1.7.1",
     "react-redux": "^5.0.3",
     "react-router": "^3.0.2",
@@ -91,6 +93,7 @@
     "react-slick": "^0.14.6",
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
-    "rx": "^4.1.0"
+    "rx": "^4.1.0",
+    "url-loader": "^0.5.8"
   }
 }

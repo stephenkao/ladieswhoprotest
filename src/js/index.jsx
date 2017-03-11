@@ -11,6 +11,7 @@ import { genRouteHandler } from './app/route-handlers';
 // Components
 import App from './components/App';
 import HomePage from './components/HomePage';
+import GalleryPage from './components/GalleryPage';
 
 
 ReactDOM.render(
@@ -19,6 +20,7 @@ ReactDOM.render(
       <Route path="/" component={ App }>
         <IndexRoute component={ HomePage } onEnter={ genRouteHandler() } />
         <Route path="home" component={ HomePage } onEnter={ genRouteHandler() } />
+        <Route path="protests" component={ GalleryPage } onEnter={ genRouteHandler() } />
         <Redirect path="*" to="home" />
       </Route>
     </Router>

@@ -1,21 +1,24 @@
 // Libraries
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 // Configuration
 import { postPropTypes } from '../config/prop-definitions';
 
 
+const delay = 200;
 /* eslint-disable react/prefer-stateless-function */
 export default class GalleryPost extends Component {
   static propTypes = {
+    index: PropTypes.number.isRequired,
     post: postPropTypes.isRequired
   };
 
-  handleOnClick = () => {
-    console.log(this.props.post.id);
+  handleOnClick = (e) => {
+    e.preventDefault();
   }
 
   render() {
     const {
+      index,
       post: {
         images,
         title
@@ -23,8 +26,15 @@ export default class GalleryPost extends Component {
     } = this.props;
 
     return (
-      <li className="flex-child post post--gallery">
+      <li
+        className="flex-child post post--gallery"
+        style={ {
+          animationDelay: `${index * delay}ms`
+        } }
+      >
         <a
+          className="post__link"
+          href="#"
           onClick={ this.handleOnClick }
         >
           <div

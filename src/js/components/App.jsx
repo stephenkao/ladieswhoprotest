@@ -1,44 +1,24 @@
 // Libraries
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-// Actions
-import { requestPosts } from '../modules/posts/action-creators';
+import React, { PropTypes } from 'react';
 // Components
-import LoadingPage from './LoadingPage';
+import Navigation from './Navigation';
+import Footer from './Footer';
 // Styles
 import '../../scss/main.scss';
 
 
-/* eslint-disable react/prefer-stateless-function */
-@connect((state) => ({
-  isFetching: state.posts.get('isFetching'),
-  posts: state.posts.get('posts')
-}))
-export default class App extends Component {
-  static defaultProps = {
-    children: [],
-    isFetching: false
-  };
+const App = ({ children }) => (
+  <div className="App">
+    <div className="App__content">
+      { children }
+      <Navigation />
+    </div>
+    <Footer />
+  </div>
+);
 
-  static propTypes = {
-    children: PropTypes.node,
-    dispatch: PropTypes.func.isRequired,
-    isFetching: PropTypes.bool
-  };
+App.propTypes = {
+  children: PropTypes.node.isRequired
+};
 
-  componentDidMount() {
-    this.props.dispatch(requestPosts());
-  }
-
-  render() {
-    const { children, isFetching } = this.props;
-
-    return (
-      <div className="App">
-        { isFetching && <LoadingPage /> }
-        { !isFetching && children }
-      </div>
-    );
-  }
-}
-/* eslint-enable react/prefer-stateless-function */
+export default App;
