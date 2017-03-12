@@ -25,6 +25,12 @@ server {
   rewrite ^/wordpress/wp-login/?$ /wordpress/wp-login.php last;
   rewrite ^/wordpress/wp-admin/?$ /wordpress/wp-admin/index.php last;
 
+  # DEV-ONLY
+  location ~ ^/(protests|share|home|about|locate) {
+    proxy_pass http://127.0.0.1:3000;
+    proxy_redirect off;
+  }
+
   location ~ \.php$ {
 #    root /home/stephenkao/workspace/stephenkao/ladieswhoprotest/wordpress;
 
