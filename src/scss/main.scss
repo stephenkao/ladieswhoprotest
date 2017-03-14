@@ -10,6 +10,8 @@ $font--primary: 'Merriweather', serif;
 $font--secondary: 'Proza Libra', sans-serif;
 $font--tertiary: 'Cormorant Garamond', serif;
 
+$width--app: 1024px;
+
 ////////////////////////////////////////////////// Animations
 @keyframes fade-in {
   0% {
@@ -99,7 +101,6 @@ a {
 }
 
 .App {
-  width: 1024px;
   margin: 0 auto;
 
   &__content {
@@ -109,12 +110,14 @@ a {
 }
 
 .Navigation {
-  width: 100%;
+  width: $width--app;
   padding: $gutter * 3 $gutter * 6;
+  margin: 0 auto;
+  margin-left: - $width--app / 2;
 
   position: absolute;
   top: 0;
-  left: 0;
+  left: 50%;
 
   &__list {
     display: flex;
@@ -155,8 +158,19 @@ a {
 
 ////////////////////////////////////////////////// HomePage
 .HomePage {
-  width: 1024px;
+  width: 100%;
   height: 768px;
+
+  position: relative;
+  overflow-y: hidden;
+
+  &__content {
+    width: $width--app;
+    height: 100%;
+    margin: 0 auto;
+
+    position: relative;
+  }
 
   &__overlay {
     width: 100%;
@@ -253,16 +267,37 @@ a {
 }
 
 ////////////////////////////////////////////////// Carousel
-.slick-slider {
-  & > button {
-    display: none !important;
+.Banner {
+  width: 100%;
+  height: 100%;
+
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  .slick-slide {
+    float: left;
   }
 
-  img {
-    position: relative;
+  &__item {
+    height: 768px;
+
+    filter: brightness(0.7);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+
+  .slick-slider {
+    & > button {
+      display: none !important;
+    }
+
+    img {
+      position: relative;
+    }
   }
 }
-
 
 ////////////////////////////////////////////////// Footer
 footer {
@@ -277,4 +312,15 @@ footer {
   h3 {
     font-size: 36px;
   }
+}
+
+
+.divider {
+  width: 897px;
+  height: 26px;
+  border: 0;
+
+  background-image: url('../img/divider.png');
+  background-repeat: no-repeat;
+  background-size: contain;
 }

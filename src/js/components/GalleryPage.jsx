@@ -10,34 +10,52 @@ import GalleryPost from './GalleryPost';
 // Utilities
 import rit from '../utils/rit';
 
+
 /* eslint-disable react/prefer-stateless-function */
-@connect((state) => ({
-  isFetching: state.posts.get('isFetching'),
-  posts: state.posts.get('posts')
-}))
+@connect(({ posts }) => {
+  const postsObj = posts.toJS();
+  return {
+    isFetching: postsObj.isFetching,
+    page: postsObj.page,
+    posts: postsObj.posts
+  };
+})
 export default class GalleryPage extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
-    isFetching: PropTypes.bool.isRequired,
-    posts: PropTypes.arrayOf(postPropTypes).isRequired
+    isFetching: PropTypes.bool,
+    page: PropTypes.number,
+    posts: PropTypes.arrayOf(postPropTypes)
   };
 
+  static defaultProps = {
+    isFetching: true,
+    page: 1,
+    posts: []
+  }
+
   componentDidMount() {
-    this.props.dispatch(requestPosts());
+    const { dispatch, page } = this.props;
+    dispatch(requestPosts({ page }));
   }
 
   render() {
-    const { posts } = this.props;
+    const { isFetching, posts } = this.props;
+
+    const shouldRenderPosts = isFetching && posts.length > 0;
 
     return (
-      <ul className="flex-container spaced Gallery">
-        { posts.map((post, index) => (
+      <ul className="flex-container spaced GalleryPage">
+        { rit(!shouldRenderPosts, () => (
+          <div>LOADING</div>
+        )) }
+        { rit(shouldRenderPosts, posts.map((post, index) => (
           <GalleryPost
             index={ index }
             key={ post.id }
             post={ post }
           />
-        )) }
+        ))) }
       </ul>
     );
   }

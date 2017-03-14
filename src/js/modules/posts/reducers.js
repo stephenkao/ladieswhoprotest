@@ -8,11 +8,14 @@ const { REQUEST_POSTS, RECEIVE_POSTS } = actionTypes;
 
 const initialState = fromJS({
   isFetching: true,
+  page: 1,
   posts: []
 });
 
 
 function handleGetPosts(state, data) {
+  console.log(data);
+
   if (!data.has('posts')) {
     return state;
   }
@@ -30,8 +33,6 @@ function handleGetPosts(state, data) {
 
     return post;
   });
-
-  console.log(posts);
 
   return state
     .set('isFetching', data.get('isFetching'))
